@@ -1,0 +1,32 @@
+{
+  "version": 2,
+  "dgSpecHash": "VYH5qCL1BTQfuvLN9+xQWJ3nJDieSe5S9KKNmRCsEhsb6GWskjm8vOFrHHyV/A0iutlkwrPgENn8W+4K25PH9w==",
+  "success": true,
+  "projectFilePath": "/Users/scarlatmarius/RiderProjects/music-app/backend/Spotify/Spotify.csproj",
+  "expectedPackageFiles": [
+    "/Users/scarlatmarius/.nuget/packages/bcrypt.net-next/4.0.2/bcrypt.net-next.4.0.2.nupkg.sha512",
+    "/Users/scarlatmarius/.nuget/packages/dnsclient/1.4.0/dnsclient.1.4.0.nupkg.sha512",
+    "/Users/scarlatmarius/.nuget/packages/microsoft.csharp/4.5.0/microsoft.csharp.4.5.0.nupkg.sha512",
+    "/Users/scarlatmarius/.nuget/packages/microsoft.extensions.apidescription.server/3.0.0/microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "/Users/scarlatmarius/.nuget/packages/microsoft.identitymodel.jsonwebtokens/6.10.2/microsoft.identitymodel.jsonwebtokens.6.10.2.nupkg.sha512",
+    "/Users/scarlatmarius/.nuget/packages/microsoft.identitymodel.logging/6.10.2/microsoft.identitymodel.logging.6.10.2.nupkg.sha512",
+    "/Users/scarlatmarius/.nuget/packages/microsoft.identitymodel.tokens/6.10.2/microsoft.identitymodel.tokens.6.10.2.nupkg.sha512",
+    "/Users/scarlatmarius/.nuget/packages/microsoft.netcore.platforms/2.1.2/microsoft.netcore.platforms.2.1.2.nupkg.sha512",
+    "/Users/scarlatmarius/.nuget/packages/microsoft.openapi/1.2.3/microsoft.openapi.1.2.3.nupkg.sha512",
+    "/Users/scarlatmarius/.nuget/packages/mongodb.bson/2.13.0-beta1/mongodb.bson.2.13.0-beta1.nupkg.sha512",
+    "/Users/scarlatmarius/.nuget/packages/mongodb.driver/2.13.0-beta1/mongodb.driver.2.13.0-beta1.nupkg.sha512",
+    "/Users/scarlatmarius/.nuget/packages/mongodb.driver.core/2.13.0-beta1/mongodb.driver.core.2.13.0-beta1.nupkg.sha512",
+    "/Users/scarlatmarius/.nuget/packages/mongodb.libmongocrypt/1.2.1/mongodb.libmongocrypt.1.2.1.nupkg.sha512",
+    "/Users/scarlatmarius/.nuget/packages/sharpcompress/0.23.0/sharpcompress.0.23.0.nupkg.sha512",
+    "/Users/scarlatmarius/.nuget/packages/swashbuckle.aspnetcore/5.6.3/swashbuckle.aspnetcore.5.6.3.nupkg.sha512",
+    "/Users/scarlatmarius/.nuget/packages/swashbuckle.aspnetcore.swagger/5.6.3/swashbuckle.aspnetcore.swagger.5.6.3.nupkg.sha512",
+    "/Users/scarlatmarius/.nuget/packages/swashbuckle.aspnetcore.swaggergen/5.6.3/swashbuckle.aspnetcore.swaggergen.5.6.3.nupkg.sha512",
+    "/Users/scarlatmarius/.nuget/packages/swashbuckle.aspnetcore.swaggerui/5.6.3/swashbuckle.aspnetcore.swaggerui.5.6.3.nupkg.sha512",
+    "/Users/scarlatmarius/.nuget/packages/system.buffers/4.5.1/system.buffers.4.5.1.nupkg.sha512",
+    "/Users/scarlatmarius/.nuget/packages/system.identitymodel.tokens.jwt/6.10.2/system.identitymodel.tokens.jwt.6.10.2.nupkg.sha512",
+    "/Users/scarlatmarius/.nuget/packages/system.runtime.compilerservices.unsafe/5.0.0/system.runtime.compilerservices.unsafe.5.0.0.nupkg.sha512",
+    "/Users/scarlatmarius/.nuget/packages/system.security.cryptography.cng/4.5.0/system.security.cryptography.cng.4.5.0.nupkg.sha512",
+    "/Users/scarlatmarius/.nuget/packages/system.text.encoding.codepages/4.5.1/system.text.encoding.codepages.4.5.1.nupkg.sha512"
+  ],
+  "logs": []
+}
