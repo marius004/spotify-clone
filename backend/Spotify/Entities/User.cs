@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using Spotify.Models.User;
@@ -17,11 +18,24 @@ namespace Spotify.Entities
         
         public string Password { get; set; }
 
+        public bool IsAdmin { get; set; }
+
+        public IEnumerable<string> SongsLiked { get; set; }
+        
+        public IEnumerable<string> BandsLiked { get; set; }
+
+        public IEnumerable<string> ArtistsLiked { get; set; }
+
+        public IEnumerable<string> PlaylistsLiked { get; set; }
+
+        public IEnumerable<string> CategoriesLiked { get; set; }
+        
         public User(CreateUserRequest req)
         {
             Email = req.Email;
             Username = req.Username;
             Password = PasswordHash.Hash(req.Password);
+            IsAdmin = true;
         }
     }
 }

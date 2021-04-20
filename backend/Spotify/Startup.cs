@@ -43,7 +43,9 @@ namespace Spotify
             
             services.AddSingleton<IUserService, UserService>();
             services.AddSingleton<ISongCategoryService, SongCategoryService>();
-            
+            services.AddSingleton<IArtistService, ArtistService>();
+            services.AddSingleton<ISongService, SongService>();
+
             services.AddControllers();
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "Spotify", Version = "v1"}); });
         }

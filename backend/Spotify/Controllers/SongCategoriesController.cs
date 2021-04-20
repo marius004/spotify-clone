@@ -10,11 +10,11 @@ namespace Spotify.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SongCategoryController : ControllerBase
+    public class SongCategoriesController : ControllerBase
     {
         private readonly ISongCategoryService _categoryService;
 
-        public SongCategoryController(ISongCategoryService categoryService)
+        public SongCategoriesController(ISongCategoryService categoryService)
         {
             _categoryService = categoryService;
         }
