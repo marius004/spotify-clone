@@ -21,7 +21,7 @@
                 <li class="nav-item">
                    <a class="nav-link" href="#">Support</a>
                 </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown" style="opacity: 1;">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-user-circle"></i> Profile
                     </a>
@@ -46,10 +46,21 @@ export default {
 
 <style scoped>
 #nav {
-    opacity: 0.75;
+    opacity: 0.85;
     z-index: 1;
     border-bottom: 1px solid black;
 }
+#nav .nav-link {
+    opacity: 1;
+    color: white;
+    font-weight: 900;
+}
+
+#nav .dropdown-item {
+    color: black;
+    font-weight: 900;
+}
+
 .navbar-brand i {
     font-size: 24px;
     margin-right: 2px;
