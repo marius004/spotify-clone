@@ -3,6 +3,7 @@
     <hr>
     <div class="form-container">
         <form @submit.prevent="handleFormSubmit">
+            <p class="warning">{{submitErr}}</p>
             <div class="form-group">
                 <label for="username">Username</label>
                 <input v-model="username" required type="text" placeholder="Enter username" class="form-control" id="username" aria-describedby="usernameHelp">
@@ -45,15 +46,47 @@ export default {
             password: '',
             usernameErr: '', 
             passwordErr: '',
+            submitErr: ''
         }
     }, 
 
     methods: {
 
+        clearErrors() {
+            this.usernameErr = '';
+            this.passwordErr = '';
+            this.submitErr = '';
+        },
+
         async handleFormSubmit() {
-            const res = await userService.login(this.username, this.password);
-            console.log(res);
+            if(this.validateInput()) {
+                try {
+                    await userService.login(this.username, this.password);
+                    this.$router.push('/');
+                } catch {
+                    this.submitErr = 'Username or Password invalid';    
+                }
+            }
+            
+            setTimeout(this.clearErrors, 5000);
         }, 
+
+        validateInput() {
+            let ok = true;
+
+            if(this.username.trim() === '') {
+                this.usernameErr = 'Username cannot be empty string';
+                ok = false;
+            }
+
+            if(this.password.trim() === '') {
+                this.passwordErr = 'Passsword cannot be empty string';
+                ok = false;
+            }
+
+            return ok;
+        }
+
     }
 }
 </script>
