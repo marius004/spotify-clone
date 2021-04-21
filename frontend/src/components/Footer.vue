@@ -24,9 +24,10 @@ footer {
 a {
     text-decoration: none;
     color: white;
-    font-size: 20px;
+    font-size: 24px;
+    font-weight: 900;
 }
 i {
-    font-size: 24px;
+    font-size: 30px;
 }
 </style>

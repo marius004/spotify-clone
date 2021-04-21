@@ -6,6 +6,7 @@
       buttonTitle="Go to player"
     />
     <SongShowCase />
+    <Footer />
   </div>
 </template>
 
@@ -13,6 +14,7 @@
 import Navbar from '@/components/Navbar.vue';
 import Jumbotron from '@/components/Jumbotron.vue';
 import SongShowCase from '@/components/SongShowCase.vue';
+import Footer from '@/components/Footer.vue';
 
 export default {
   name: 'Home',
@@ -20,6 +22,7 @@ export default {
     Navbar,
     Jumbotron,
     SongShowCase,
+    Footer,
   }
 }
 </script>

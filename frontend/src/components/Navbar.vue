@@ -19,15 +19,19 @@
         <div class="form-inline my-2 my-lg-0">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                   <a class="nav-link" href="#">Support</a>
+                   <a class="nav-link" href="">Support</a>
                 </li>
                 <li class="nav-item dropdown" style="opacity: 1;">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-user-circle"></i> Profile
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Log in</a>
-                        <a class="dropdown-item" href="#">Sign up</a>
+                        <router-link to="/login">
+                            <a class="dropdown-item" href="#">Log in</a>
+                        </router-link>
+                        <router-link to="/signup">
+                             <a class="dropdown-item" href="#">Sign up</a>
+                        </router-link>
                     </div>
                 </li>
             </ul>
@@ -61,8 +65,24 @@ export default {
     font-weight: 900;
 }
 
-.navbar-brand i {
+.navbar-brand {
     font-size: 24px;
+}
+
+.navbar-brand i {
+    font-size: 30px;
     margin-right: 2px;
+    font-weight: 100;
+}
+a {
+    font-size: 24px;
+    text-decoration: none;
+}
+* {font-weight: 900;}
+li {
+    margin-right: 30px;
+}
+li:last-child {
+    margin-right: 0;
 }
 </style>

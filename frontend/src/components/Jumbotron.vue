@@ -46,7 +46,7 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Antonio:wght@500&display=swap');
 
 .jumbotron {
-    height: 90vh;
+    height: 92vh;
     font-family: 'Antonio', sans-serif;
 }
 

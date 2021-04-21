@@ -2,7 +2,7 @@
     <div class="looking-for-music">
         <h1>Looking for music?</h1>
         <h4>Start listening to the best new releases.</h4>
-        <button class="launch-web-player-btn btn">Launch Web Player</button>
+        <button class="launch-web-player-btn btn text-center">Launch Web Player</button>
     </div>
     <SongCards />
 </template>
@@ -17,12 +17,13 @@ export default {
     components: {
         SongCards,
     }
-
 }
 </script>
 
 <style scoped>
 .looking-for-music {
+    width: 50%;
+    margin: 0 auto;
     text-align: center;
     margin-bottom: 50px;
 }

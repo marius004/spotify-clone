@@ -31,4 +31,5 @@ export default {
 img {
     max-height: 200px;
 }
+* {font-weight: 900;}
 </style>

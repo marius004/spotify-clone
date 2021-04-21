@@ -1,0 +1,38 @@
+hr {
+    background-color: #616161;
+}
+
+.form-container {
+    width: 40%;
+    margin: 0 auto 20px auto;
+    font-weight: 900;
+}
+
+label {
+    float: left;
+}
+
+button {
+    width: 100%;
+    font-weight: 900;
+    color: white;
+}
+
+.signup,
+.login {
+    border-radius: 20px;
+}
+
+.create-account-title {
+    font-weight: 900;
+    font-size: 18px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.warning {
+    color: red;
+    font-size: 14px;
+}
