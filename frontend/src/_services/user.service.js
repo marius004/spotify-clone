@@ -6,12 +6,17 @@ const userService = {
     logout,
     signup,
     getCurrentUser,
+    isUserLoggedIn,
 };
+
+function isUserLoggedIn() {
+    const user = JSON.parse(localStorage.getItem('user'));
+    return user ? true : false;
+}
 
 function getCurrentUser() {
     const user = JSON.parse(localStorage.getItem('user'));
-    const currentUser = user ? { status: { loggedIn: true }, user } : { status: {}, user: null };
-    return currentUser;
+    return user;
 }
 
 function login(username, password) {

@@ -26,12 +26,19 @@
                         <i class="fa fa-user-circle"></i> Profile
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <router-link to="/login">
-                            <a class="dropdown-item" href="#">Log in</a>
-                        </router-link>
-                        <router-link to="/signup">
-                             <a class="dropdown-item" href="#">Sign up</a>
-                        </router-link>
+                        <div v-if="!isLoggedIn">
+                            <router-link to="/login">
+                                <a class="dropdown-item" href="#">Log in</a>
+                            </router-link>
+                            <router-link to="/signup">
+                                <a class="dropdown-item" href="#">Sign up</a>
+                            </router-link>
+                        </div>
+                        <div v-else>
+                            <router-link to="/">
+                                <a @click="logout" class="dropdown-item" href="#">Log out</a>
+                            </router-link>
+                        </div>
                     </div>
                 </li>
             </ul>
@@ -43,8 +50,21 @@
 </template>
 
 <script>
+import userService from '../_services/user.service.js';
+
 export default {
     name: "Navbar",
+
+    computed: {
+        isLoggedIn: () => userService.isUserLoggedIn(),
+    }, 
+
+    methods: {
+        logout() {
+            userService.logout();
+            window.location.reload(true);
+        }
+    }
 }
 </script>
 
