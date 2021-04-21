@@ -4,7 +4,7 @@
         <h4>Start listening to the best new releases.</h4>
         <button class="launch-web-player-btn btn text-center">Launch Web Player</button>
     </div>
-    <SongCards />
+    <SongCards :cards="cards" />
 </template>
 
 <script>
@@ -16,6 +16,13 @@ export default {
 
     components: {
         SongCards,
+    }, 
+
+    props: {
+        cards: {
+            type: Array, 
+            required: true,
+        }
     }
 }
 </script>

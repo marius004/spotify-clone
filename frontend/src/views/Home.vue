@@ -5,7 +5,9 @@
       title="Listen to music. Everywhere."
       buttonTitle="Go to player"
     />
-    <SongShowCase />
+    <SongShowCase 
+      :cards="cards" 
+    />
     <Footer />
   </div>
 </template>
@@ -23,6 +25,38 @@ export default {
     Jumbotron,
     SongShowCase,
     Footer,
+  }, 
+  data() {
+    return {
+      cards: [
+          [{
+                  title: 'Mark Tremonti',
+                  image: 'mark-tremonti.jpg'
+              },
+              {
+                  title: 'Snoop Dogg',
+                  image: 'snoop-dogg.jpg'
+              },
+              {
+                  title: 'Chad Kroeger',
+                  image: 'chad-kroeger.jpg'
+              }
+          ],
+          [{
+                  title: 'Creed',
+                  image: 'creed.jpg'
+              },
+              {
+                  title: 'Eminem',
+                  image: 'eminem.jpg'
+              },
+              {
+                  title: 'Alter Bridge',
+                  image: 'alter-bridge.jpg'
+              }
+          ]
+      ]
+    }
   }
 }
 </script>

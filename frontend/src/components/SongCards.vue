@@ -1,42 +1,10 @@
 <template>
     <div class="container cards">
-        <div class="row">
-            <div class="col lg-4 sm-12">
-                <SongCard
-                    title="Mark Tremonti"
-                    :image="require('../assets/img/mark-tremonti.jpg')"
-                />
-            </div>
-            <div class="col lg-4 sm-12">
-                <SongCard 
-                    title="Snoop Dogg"
-                    :image="require('../assets/img/snoop-dogg.jpg')"
-                />
-            </div>
-            <div class="col lg-4 sm-12">
-                <SongCard 
-                    title="Chad Kroeger"
-                    :image="require('../assets/img/chad-kroeger.jpg')"
-                />
-            </div>
-        </div>
-         <div class="row">
-            <div class="col lg-4">
-                <SongCard
-                    title="Creed"
-                    :image="require('../assets/img/creed.jpg')"
-                />
-            </div>
-            <div class="col lg-4">
-                <SongCard 
-                    title="Eminem"
-                    :image="require('../assets/img/eminem.jpg')"
-                />
-            </div>
-            <div class="col lg-4 sm-12">
-                <SongCard 
-                    title="Alter Bridge"
-                    :image="require('../assets/img/alter-bridge.jpg')"
+        <div class="row" v-for="(cardRow, rIndex) in cards" :key="rIndex">
+            <div class="col lg-4 sm-12" v-for="(card, cIndex) in cardRow" :key="cIndex">
+                 <SongCard
+                    :title="card.title"
+                    :image="require(`@/assets/img/${card.image}`)"
                 />
             </div>
         </div>
@@ -48,8 +16,16 @@ import SongCard from '@/components/SongCard.vue';
 
 export default {
     name: "SongCards",
+    
     components: {
         SongCard,
+    },
+
+    props: {
+        cards: {
+            type: Array, 
+            required: true,
+        }
     }
 }
 </script>
