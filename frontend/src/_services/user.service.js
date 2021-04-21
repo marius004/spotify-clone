@@ -1,14 +1,15 @@
+import axios from 'axios';
 import config from '../config';
 
 const userService = {
     login,
     logout,
+    signup,
     getCurrentUser,
 };
 
 function getCurrentUser() {
     const user = JSON.parse(localStorage.getItem('user'));
-    console.log(user);
     const currentUser = user ? { status: { loggedIn: true }, user } : { status: {}, user: null };
     return currentUser;
 }
@@ -32,6 +33,29 @@ function login(username, password) {
 
             return user;
         });
+}
+
+async function signup(email, username, password) {
+
+    try {
+        const res = await axios.post(`${config.apiUrl}/users`, {
+            email,
+            username,
+            password
+        });
+
+        const user = res.data;
+
+        if (user && user.jwtToken)
+            localStorage.setItem('user', JSON.stringify(user));
+
+        return user;
+
+    } catch (err) {
+        return {
+            error: "Username or Email already taken"
+        }
+    }
 }
 
 function handleResponse(response) {

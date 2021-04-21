@@ -3,6 +3,7 @@
     <hr>
     <div class="form-container">
         <form @submit.prevent="handleFormSubmit">
+            <p class="warning">{{submitErr}}</p>
             <div class="form-group">
                 <label for="email">Email</label>
                 <input v-model="email" type="email" required placeholder="Enter email" class="form-control" id="email" aria-describedby="emailHelp">
@@ -35,6 +36,7 @@
 
 <script>
 import Header from '@/components/Header.vue';
+import userService from '@/_services/user.service.js';
 
 export default {
     name: 'Signup',
@@ -53,17 +55,25 @@ export default {
             usernameErr: '', 
             passwordErr: '',
             confirmPasswordErr: '',
+            submitErr: ''
         }
     }, 
 
     methods: {
 
-        handleFormSubmit() {
-            if(!this.validateInput()) {
-                setTimeout(this.clearErrors, 5000);
-            } else {
-                1;
-            }
+        async handleFormSubmit() {
+            if(this.validateInput()) {
+
+                const data = await userService.signup(this.email, this.username, this.password);
+ 
+                if(data.error) {
+                    this.submitErr = 'Username or Email already taken';
+                } else {
+                    this.$router.push('/');
+                }
+            }  
+
+            setTimeout(this.clearErrors, 5000);
         },
         
         clearErrors() {
@@ -71,11 +81,12 @@ export default {
             this.usernameErr = '';
             this.passwordErr = '';
             this.confirmPasswordErr = '';
+            this.submitErr = '';
         },
 
         validateInput() {
 
-            let ok = false;
+            let ok = true;
 
             if(this.password.length < 8) {
                 this.passwordErr = 'The password must contain at least 8 characters';
