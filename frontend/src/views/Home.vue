@@ -3,7 +3,7 @@
     <Navbar />
     <Jumbotron 
       title="Listen to music. Everywhere."
-      buttonTitle="Go to player"
+      buttonTitle="Listen to music"
     />
     <SongShowCase 
       :cards="cards" 
