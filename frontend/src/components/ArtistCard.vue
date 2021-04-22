@@ -67,7 +67,7 @@ export default {
         quote: {
             type: String, 
             required: true,
-        }
+        }, 
     },
 
     components: {
