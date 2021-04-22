@@ -1,5 +1,6 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/Home.vue'
+import { createRouter, createWebHistory } from 'vue-router';
+import Home from '../views/Home.vue';
+import userService from '../_services/user.service.js';
 
 const routes = [{
         path: '/',
@@ -23,6 +24,18 @@ const routes = [{
         name: 'Signup',
         component: () =>
             import ('../views/Signup.vue')
+    },
+    {
+        path: '/account/:id',
+        name: 'Account',
+        component: () =>
+            import ('../views/Account.vue')
+    },
+    {
+        path: '/artist/:id',
+        name: 'Artist',
+        component: () =>
+            import ('../views/Artist.vue')
     }
 ];
 
@@ -32,10 +45,16 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
+
+    if (to.path.substr(0, 7) == '/artist') {
+        next();
+        return;
+    }
+
     // redirect to login page if not logged in and trying to access a restricted page
-    const publicPages = ['/login', '/', '/signup'];
+    const publicPages = ['/login', '/', '/signup', '/artist'];
     const authRequired = !publicPages.includes(to.path);
-    const loggedIn = localStorage.getItem('user');
+    const loggedIn = userService.isUserLoggedIn();
 
     if (authRequired && !loggedIn)
         return next('/login');

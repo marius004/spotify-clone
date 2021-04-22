@@ -31,12 +31,15 @@
                                 <a class="dropdown-item" href="#">Log in</a>
                             </router-link>
                             <router-link to="/signup">
-                                <a class="dropdown-item" href="#">Sign up</a>
+                                <a class="dropdown-item">Sign up</a>
                             </router-link>
                         </div>
                         <div v-else>
+                            <router-link to="/account">
+                                <a class="dropdown-item">Account</a>
+                            </router-link>
                             <router-link to="/">
-                                <a @click="logout" class="dropdown-item" href="#">Log out</a>
+                                <a @click="logout" class="dropdown-item">Log out</a>
                             </router-link>
                         </div>
                     </div>
