@@ -13,6 +13,8 @@ namespace Spotify.Interfaces
 
         Task<IEnumerable<Artist>> GetAll();
 
+        Task<Artist> GetById(string id);
+
         Task<IEnumerable<Artist>> GetByCategory(string category);
     }
 }

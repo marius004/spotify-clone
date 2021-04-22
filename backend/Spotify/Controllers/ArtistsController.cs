@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Spotify.Entities;
@@ -24,8 +25,21 @@ namespace Spotify.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get(string categoryId)
+        public async Task<IActionResult> Get(string categoryId, string singerId)
         {
+
+            if (!string.IsNullOrEmpty(singerId))
+            {
+                Thread.Sleep(1000);
+                var res = await _artistService.GetById(singerId);
+
+                // no artist with the given id
+                if (res == null)
+                    return NotFound();
+                
+                return Ok(res);
+            }
+            
             if (!string.IsNullOrEmpty(categoryId))
             {
                 var res = await _artistService.GetByCategory(categoryId);
