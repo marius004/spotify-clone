@@ -10,24 +10,16 @@
 
         <ArtistCard 
             :image="image" 
-            :name="data && data.name ? data.name : ''"
-            :rating="data && data.rating ? data.rating : -1"
+            :name="artistData && artistData.name ? artistData.name : ''"
+            :rating="artistData && artistData.rating ? artistData.rating : -1"
             quote="That's one of the main thing with the lyrics - not giving any answers."
         />
 
         <Songs :audios="audioData"/>
 
-        <!-- <div style="margin-top: 100px;" v-for="(audio, index) in audioData.data" :key="index">
-            <audio controls>
-                <source :src="'data:audio/wav;base64,' + audio.audio" type="audio/base64">
-                <source :src="'data:audio/wav;base64,' + audio.audio" type="audio/mpeg">
-                Your browser does not support the audio tag.
-            </audio>
-        </div> -->
-
         <Player 
-            :audio="audioData[1].audio"
-            :title="audioData[1].name"
+            :currentSong="audioData[index].audio"
+            :title="audioData[index].name"
             @next="nextSong"
             @prev="prevSong"
         />
@@ -49,46 +41,47 @@ export default {
 
     async created() {
         this.artistId = this.$route.params.id;
+
         try {
-            this.data = await artistService.get(this.artistId);
-        }catch {
-            this.data = { error: "Artist not found" };
+            let artistReq = artistService.getById(this.artistId);
+            let songReq   = songService.getBySinger(this.artistId);
+            
+            const artistRes = await artistReq;
+            const songRes   = await songReq;
+
+            this.artistData = artistRes.data;
+            this.audioData   = songRes.data;
+
+            this.loaded = true;
+        }catch(err) {
+            console.error(err);
             this.$router.push('/');
         }
-
-        try {
-            this.audioData = await songService.getBySinger(this.artistId);
-            this.audioData = this.audioData.data;
-            this.loaded = true;
-        }catch {
-            console.log("bad");
-        }
-
     }, 
 
     methods: {
         nextSong() {
-           this.index = 1;
+           this.index = Math.min(this.index + 1, this.audioData.length - 1);
         }, 
         prevSong() {
-            this.index = 1;
+            this.index = Math.max(this.index - 1, 0);
         }
     },
 
     data() {
         return {
             artistId: "",
-            data: {},
+            artistData: {},
             loaded: false,
-            audioData: "",
+            audioData: {},
             index: 0,
         }
     },
 
     computed: {
         image() {
-            if(this.data && this.data.image) 
-                return "data:image/png;base64, " + this.data.image;
+            if(this.artistData && this.artistData.image) 
+                return "data:image/png;base64, " + this.artistData.image;
             return "";
         }
     }, 

@@ -2,17 +2,11 @@ import axios from 'axios';
 import config from '../config.js';
 
 const artistService = {
-    get,
+    getById,
 };
 
-async function get(id) {
-    try {
-        const res = await axios.get(`${config.apiUrl}/artists?singerId=${id}`);
-        return res.data;
-    } catch {
-        const res = {};
-        return res;
-    }
+async function getById(id) {
+    return await axios.get(`${config.apiUrl}/artists?singerId=${id}`);
 }
 
 export default artistService;
