@@ -3,7 +3,6 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 control">
-                    <p class="title">{{title}}</p>
                     <div class="d-flex justify-content-center" style="margin-bottom: 12px">
                         <i @click="prevSong" class="prev fa fa-step-backward"></i>
                         <i @click="playSong" v-if="!isPlaying" class="play fa fa-play-circle"></i>
@@ -12,8 +11,7 @@
                     </div>
                     <div class="progress">
                         <div class="progress-bar" role="progressbar" 
-                            :style="progressStyling" 
-                            aria-valuenow="0" aria-valuemin="0" 
+                            :style="progressStyling"
                             :aria-valuemax="duration">
                         </div>
                     </div>
@@ -50,6 +48,7 @@ export default {
             this.$refs.loader.load();
             this.isPlaying = false;
             this.removeEventListener();
+            this.playSong();
         }
     },
 
@@ -119,6 +118,7 @@ export default {
 
 <style scoped>
 .player {
+    opacity: 0.8;
     text-align: center;
     color: white;
     position: absolute;
@@ -126,7 +126,8 @@ export default {
     bottom: 0;
     border-top: 2px solid #78909c;
     background-color: #263238;
-    padding: 12px 16px;
+    padding-top: 12px;
+    padding-bottom: 6px;
     -webkit-box-shadow: 5px -4px 5px 0px rgba(0,0,0,0.39);
     -moz-box-shadow: 5px -4px 5px 0px rgba(0,0,0,0.39);
     box-shadow: 5px -4px 5px 0px rgba(0,0,0,0.39);

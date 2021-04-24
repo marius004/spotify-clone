@@ -65,7 +65,8 @@ export default {
 * { font-weight: bold; }
 img {
     width: 100%;
-    max-height: 50vh;
+    min-height: 30vh;
+    max-height: 45vh;
 }
 .artist-container {
     width: 94%;

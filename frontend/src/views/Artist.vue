@@ -12,12 +12,16 @@
             :image="image" 
             :name="artistData && artistData.name ? artistData.name : ''"
             :rating="artistData && artistData.rating ? artistData.rating : -1"
-            quote="That's one of the main thing with the lyrics - not giving any answers."
+            :quote="artistData.quote"
         />
 
-        <Songs :audios="audioData"/>
+        <Songs v-if="audioData.length > 0" 
+            :audios="audioData"
+            :activeSong="index"
+            @play="handleSongsBtnClick"
+        />
 
-        <Player 
+        <Player v-if="audioData.length > 0"
             :currentSong="audioData[index].audio"
             :title="audioData[index].name"
             @next="nextSong"
@@ -65,6 +69,9 @@ export default {
         }, 
         prevSong() {
             this.index = Math.max(this.index - 1, 0);
+        },
+        handleSongsBtnClick(index) {
+            this.index = index;
         }
     },
 
