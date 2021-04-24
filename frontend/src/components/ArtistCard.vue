@@ -1,10 +1,5 @@
 <template>
-<div v-if="!loaded">
-    <Loading 
-        text="Fetching artist data..."
-    />
-</div>
-<div v-else class="artist-container">
+<div class="artist-container">
     <div class="row">
 
     <div class="col-lg-12">
@@ -42,8 +37,6 @@
 </template>
 
 <script>
-import Loading from '@/components/Loading.vue';
-
 export default {
     name: "ArtistCard", 
     
@@ -60,19 +53,11 @@ export default {
             type: Number, 
             required: true,
         }, 
-        loaded: {
-            type: Boolean, 
-            required: true,
-        }, 
         quote: {
             type: String, 
             required: true,
         }, 
     },
-
-    components: {
-        Loading,
-    }
 }
 </script>
 
