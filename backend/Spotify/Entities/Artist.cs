@@ -16,6 +16,8 @@ namespace Spotify.Entities
         public IEnumerable<string> CategoriesId { get; set; }
 
         public int Rating { get; set; }
+
+        public string Quote { get; set; }
         
         ///  base 64 image
         public string Image { get; set; }

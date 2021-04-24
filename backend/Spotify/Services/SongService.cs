@@ -11,7 +11,6 @@ namespace Spotify.Services
 {
     public class SongService : ISongService
     {
-
         private readonly IMongoCollection<Song> _songs;
         
         public SongService(DatabaseSettings databaseSettings)

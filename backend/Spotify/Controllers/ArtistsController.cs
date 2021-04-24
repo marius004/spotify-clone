@@ -30,7 +30,6 @@ namespace Spotify.Controllers
 
             if (!string.IsNullOrEmpty(singerId))
             {
-                Thread.Sleep(1000);
                 var res = await _artistService.GetById(singerId);
 
                 // no artist with the given id

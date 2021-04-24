@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Spotify.Entities;
 
 namespace Spotify.Models.Artist
 {
@@ -11,6 +10,9 @@ namespace Spotify.Models.Artist
         
         [Required]
         public IEnumerable<string> CategoriesId { get; set; }
+
+        [Required]
+        public string Quote { get; set; }
 
         [Required]
         public string Image { get; set; }
