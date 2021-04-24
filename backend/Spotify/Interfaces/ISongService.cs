@@ -10,6 +10,7 @@ namespace Spotify.Interfaces
         Task Create(CreateSongRequest req);
         
         Task<IEnumerable<Song>> GetAll();
+        Task<IEnumerable<Song>> GetByArtist(string artistId);
         
         Task<IEnumerable<Song>> GetByCategory(string categoryId);
     }

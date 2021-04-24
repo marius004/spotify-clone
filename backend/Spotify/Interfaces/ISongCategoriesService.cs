@@ -10,7 +10,6 @@ namespace Spotify.Interfaces
         Task Create(CreateCategoryRequest category);
 
         Task<IEnumerable<SongCategory>> GetAll();
-        
         Task DeleteById(string id);
     }
 }

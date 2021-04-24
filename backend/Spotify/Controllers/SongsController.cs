@@ -27,10 +27,13 @@ namespace Spotify.Controllers
         }  
         
         [HttpGet]
-        public async Task<IEnumerable<Song>> Get(string categoryId)
+        public async Task<IEnumerable<Song>> Get(string categoryId, string artistId)
         {
             if (!string.IsNullOrEmpty(categoryId))
                 return await _songService.GetByCategory(categoryId);
+
+            if (!string.IsNullOrEmpty(artistId))
+                return await _songService.GetByArtist(artistId);
 
             return await _songService.GetAll();
         }
