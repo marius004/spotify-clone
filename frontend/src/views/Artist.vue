@@ -13,6 +13,7 @@
             :name="artistData && artistData.name ? artistData.name : ''"
             :rating="artistData && artistData.rating ? artistData.rating : -1"
             :quote="artistData.quote"
+            @playFirstSong="playFirstSong"
         />
 
         <Songs v-if="audioData.length > 0" 

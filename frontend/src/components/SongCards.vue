@@ -2,9 +2,10 @@
     <div class="container cards">
         <div class="row" v-for="(cardRow, rIndex) in cards" :key="rIndex">
             <div class="col lg-4 sm-12" v-for="(card, cIndex) in cardRow" :key="cIndex">
-                 <SongCard
+                <SongCard
                     :title="card.title"
                     :image="require(`@/assets/img/${card.image}`)"
+                    :artistId="card.artistId"
                 />
             </div>
         </div>

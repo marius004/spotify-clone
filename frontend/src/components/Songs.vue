@@ -45,7 +45,7 @@ export default {
 .form-container {
     width: 94%;
     margin: 0 auto;
-    max-height: 35vh;
+    max-height: 30vh;
     overflow: auto;
 }
 .fa-play {
@@ -53,5 +53,10 @@ export default {
 }
 tbody tr.active {
     color: #ef6c00;
+}
+@media only screen and (max-width: 800px) {
+    .form-container {
+        max-height: 20vh;
+    }
 }
 </style>

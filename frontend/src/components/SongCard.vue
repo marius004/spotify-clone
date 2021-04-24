@@ -1,9 +1,13 @@
 <template>
   <div class="card">
-    <img class="card-img-top" :src="image" alt="Card image cap">
+    <img class="card-img-top" :src="image" alt="Artist Image">
     <div class="card-body">
       <h5 class="card-title">{{title}}</h5>
-      <button class="btn btn-primary">See songs</button>
+      <button 
+        @click="$router.push(`/artist/${artistId}`)"
+        class="btn btn-primary">
+        See songs
+      </button>
     </div>
   </div>
 </template>
@@ -19,6 +23,10 @@ export default {
         image: {
             type: String, 
             required: true,
+        },
+        artistId: {
+          type: String, 
+          required: true,
         }
     }
 }

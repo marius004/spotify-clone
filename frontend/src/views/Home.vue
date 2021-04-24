@@ -31,28 +31,34 @@ export default {
       cards: [
           [{
                   title: 'Mark Tremonti',
-                  image: 'mark-tremonti.jpg'
+                  image: 'mark-tremonti.jpg',
+                  artistId: '607eb9745c0f7f6194dd7922'
               },
               {
                   title: 'Snoop Dogg',
-                  image: 'snoop-dogg.jpg'
+                  image: 'snoop-dogg.jpg', 
+                  artistId: '607eb9745c0f7f6194dd7922'
               },
               {
                   title: 'Chad Kroeger',
-                  image: 'chad-kroeger.jpg'
+                  image: 'chad-kroeger.jpg', 
+                  artistId: '607eb9745c0f7f6194dd7922'
               }
           ],
           [{
                   title: 'Creed',
-                  image: 'creed.jpg'
+                  image: 'creed.jpg', 
+                  artistId: '607eb9745c0f7f6194dd7922'
               },
               {
                   title: 'Eminem',
-                  image: 'eminem.jpg'
+                  image: 'eminem.jpg', 
+                  artistId: '607eb9745c0f7f6194dd7922'
               },
               {
                   title: 'Alter Bridge',
-                  image: 'alter-bridge.jpg'
+                  image: 'alter-bridge.jpg', 
+                  artistId: '607eb9745c0f7f6194dd7922'
               }
           ]
       ]
