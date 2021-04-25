@@ -87,6 +87,7 @@ img {
 }
 .description {
     position: relative;
+    padding-top: 20px;
 }
 .fa-star {
     font-size: 36px;
