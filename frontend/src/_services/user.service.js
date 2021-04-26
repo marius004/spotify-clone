@@ -14,6 +14,8 @@ const userService = {
     removeSongLiked,
     addSongLiked,
     updateSongsLikedOnBackend,
+    addArtistLiked,
+    removeArtistLiked,
 };
 
 async function updateSongsLikedOnBackend(id) {
@@ -55,12 +57,32 @@ function removeSongLiked(id) {
 }
 
 function addSongLiked(id) {
-    const user = JSON.parse(localStorage.getItem('user'));
+    const user = getCurrentUser();
 
     if (!user.songsLiked)
         user.songsLiked = [];
 
     user.songsLiked = [...user.songsLiked, id];
+    localStorage.setItem('user', JSON.stringify(user));
+}
+
+function removeArtistLiked(id) {
+    const user = getCurrentUser();
+
+    if (!user.artistsLiked)
+        user.artistsLiked = [];
+
+    user.artistsLiked = user.artistsLiked.filter(art => art !== id);
+    localStorage.setItem('user', JSON.stringify(user));
+}
+
+function addArtistLiked(id) {
+    const user = getCurrentUser();
+
+    if (!user.artistsLiked)
+        user.artistsLiked = [];
+
+    user.artistsLiked = [...user.artistsLiked, id];
     localStorage.setItem('user', JSON.stringify(user));
 }
 
