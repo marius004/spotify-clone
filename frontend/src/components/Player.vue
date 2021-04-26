@@ -8,6 +8,7 @@
                         <i @click="playSong" v-if="!isPlaying" class="play fa fa-play-circle"></i>
                         <i @click="stopSong" v-else class="pause fa fa-pause-circle"></i>
                         <i @click="nextSong" class="fa fa-step-forward"></i>
+                        <i @click="playSongAgain" class="fa fa-refresh" aria-hidden="true"></i>
                     </div>
                     <div class="progress">
                         <div class="progress-bar" role="progressbar" 
@@ -37,10 +38,6 @@ export default {
             type: String, 
             required: true,
         }, 
-        title: {
-            type: String, 
-            required: true,
-        }
     },
     
     watch: {
@@ -50,6 +47,10 @@ export default {
             this.removeEventListener();
             this.playSong();
         }
+    },
+
+    beforeUnmount() {
+        this.removeEventListener();
     },
 
     data() {
@@ -94,6 +95,9 @@ export default {
             this.seconds = 0;
             this.duration = 0;
             this.$emit('prev'); 
+        },
+        playSongAgain() {
+            this.$refs.loader.currentTime = 0;
         }
     },
 
@@ -143,9 +147,5 @@ export default {
 }
 .control {
     margin: 0 auto;
-}
-.title {
-    transform: translate(-20px, 0);
-    color: white;
 }
 </style>

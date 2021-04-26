@@ -3,10 +3,15 @@ import config from '../config.js';
 
 const artistService = {
     getById,
+    getArtistName,
 };
 
-async function getById(id) {
-    return await axios.get(`${config.apiUrl}/artists?singerId=${id}`);
+function getById(id) {
+    return axios.get(`${config.apiUrl}/artists?singerId=${id}`);
+}
+
+function getArtistName(id) {
+    return axios.get(`${config.apiUrl}/artists/name/${id}`);
 }
 
 export default artistService;

@@ -6,7 +6,6 @@
                     <th scope="col">#</th>
                     <th scope="col">Title</th>
                     <th scope="col">Liked by</th>
-                    <th scope="col">Disliked by</th>
                     <th scope="col">Play</th>
                 </tr>
             </thead>
@@ -14,9 +13,10 @@
                 <tr v-for="(audio, index) in audios" 
                     :key="index" :class="{active: index == activeSong}">
                     <th scope="row">{{index + 1}}</th>
-                    <td>{{audio.name}}</td>
-                    <td>{{audio.likedBy ? audio.likedBy : 0 }}</td>
-                    <td>{{audio.dislikedBy ? audio.dislikedBy : 0}}</td>
+                    <td @click="$router.push(`/song/${audio.id}`)">
+                        {{audio.name}}
+                    </td>
+                    <td>{{ likes[index] ? likes[index] : 0 }}</td>
                     <td><i @click="$emit('play', index)" class="fa fa-play"></i></td>
                 </tr>
             </tbody>
@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import songService from '../_services/song.service';
 export default {
     name: "Songs", 
     props: {
@@ -36,11 +37,31 @@ export default {
             type: Number, 
             required: true,
         }
+    }, 
+    methods: {
+        async getLikes(id) {
+            const likes = await songService.getSongLikes(id);
+            console.log(likes.data);
+            return likes.data;
+        }
+    },
+    data() {
+        return {
+            likes: []
+        }
+    },
+    async created() {
+        if(this.audios) {
+            for(let i = 0;i < this.audios.length;++i) {
+                const res = await songService.getSongLikes(this.audios[i].id);
+                this.likes.push(res.data);
+            }
+        }
     }
 }
 </script>
 
-<style>
+<style scoped>
 * { font-weight: 900; }
 .form-container {
     width: 94%;

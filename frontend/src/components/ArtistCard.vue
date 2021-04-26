@@ -10,7 +10,12 @@
                 </div>
                 
                 <div class="col-lg-6 description">
-                    <h1>{{name}}</h1>
+                    <router-link v-if="artistLink" :to="artistLink">
+                        <h1>{{name}}</h1>
+                    </router-link>
+                    <h1 v-else>
+                        {{name}}
+                    </h1>
                     <div class="stars">
                         <i class="fa fa-star fa-lg" 
                         v-for="star in 5" 
@@ -52,6 +57,10 @@ export default {
             type: String, 
             required: true,
         }, 
+        artistLink: {
+            type: String, 
+            required: false,
+        }
     },
 }
 </script>

@@ -13,7 +13,6 @@
             :name="artistData && artistData.name ? artistData.name : ''"
             :rating="artistData && artistData.rating ? artistData.rating : -1"
             :quote="artistData.quote"
-            @playFirstSong="playFirstSong"
         />
 
         <Songs v-if="audioData.length > 0" 
@@ -24,7 +23,6 @@
 
         <Player v-if="audioData.length > 0"
             :currentSong="audioData[index].audio"
-            :title="audioData[index].name"
             @next="nextSong"
             @prev="prevSong"
         />
@@ -66,14 +64,24 @@ export default {
 
     methods: {
         nextSong() {
-           this.index = Math.min(this.index + 1, this.audioData.length - 1);
-        }, 
-        prevSong() {
-            this.index = Math.max(this.index - 1, 0);
+           if(this.index === this.audioData.length - 1)
+                this.index = 0;
+           else
+                this.index = Math.min(this.index + 1, this.audioData.length - 1);
         },
-        handleSongsBtnClick(index) {
+        prevSong() {
+            if(this.index === 0)
+                this.index = this.audioData.length - 1;
+            else 
+                this.index = Math.max(this.index - 1, 0);
+        },
+        handleSongsBtnClick(index) { 
             this.index = index;
-        }
+        },
+    },
+
+    beforeUnmount() {
+        this.audioData = "";
     },
 
     data() {

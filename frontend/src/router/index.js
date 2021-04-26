@@ -8,12 +8,6 @@ const routes = [{
         component: Home
     },
     {
-        path: '/about',
-        name: 'About',
-        component: () =>
-            import ('../views/About.vue')
-    },
-    {
         path: '/login',
         name: 'Login',
         component: () =>
@@ -36,6 +30,12 @@ const routes = [{
         name: 'Artist',
         component: () =>
             import ('../views/Artist.vue')
+    },
+    {
+        path: '/song/:id',
+        name: 'Song',
+        component: () =>
+            import ('../views/Song.vue'),
     }
 ];
 
@@ -46,13 +46,8 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
 
-    if (to.path.substr(0, 7) == '/artist') {
-        next();
-        return;
-    }
-
     // redirect to login page if not logged in and trying to access a restricted page
-    const publicPages = ['/login', '/', '/signup', '/artist'];
+    const publicPages = ['/login', '/', '/signup'];
     const authRequired = !publicPages.includes(to.path);
     const loggedIn = userService.isUserLoggedIn();
 

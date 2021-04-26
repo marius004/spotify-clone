@@ -1,5 +1,6 @@
 import axios from 'axios';
 import config from '../config';
+import { authHeader } from '../_helpers/auth-header';
 
 const userService = {
     login,
@@ -7,7 +8,76 @@ const userService = {
     signup,
     getCurrentUser,
     isUserLoggedIn,
+    getUserId,
+    getSongsLiked,
+    getArtistsLiked,
+    removeSongLiked,
+    addSongLiked,
+    updateSongsLikedOnBackend,
 };
+
+async function updateSongsLikedOnBackend(id) {
+
+    const data = [id];
+    const songsLiked = getSongsLiked();
+
+    if (songsLiked.includes(id)) {
+        const res = await axios.put(`${config.apiUrl}/user`, {
+            songsLiked: data
+        }, {
+            headers: authHeader(),
+        });
+        if (res.status == 401) {
+            logout();
+            window.location.reload(true);
+        }
+    } else {
+        const res = await axios.put(`${config.apiUrl}/user`, {
+            songsUnliked: data
+        }, {
+            headers: authHeader(),
+        });
+        if (res.status == 401) {
+            logout();
+            window.location.reload(true);
+        }
+    }
+}
+
+function removeSongLiked(id) {
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    if (!user.songsLiked)
+        user.songsLiked = [];
+
+    user.songsLiked = user.songsLiked.filter(sng => sng !== id);
+    localStorage.setItem('user', JSON.stringify(user));
+}
+
+function addSongLiked(id) {
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    if (!user.songsLiked)
+        user.songsLiked = [];
+
+    user.songsLiked = [...user.songsLiked, id];
+    localStorage.setItem('user', JSON.stringify(user));
+}
+
+function getArtistsLiked() {
+    const user = JSON.parse(localStorage.getItem('user'));
+    return user && user.artistsLiked ? user.artistsLiked : [];
+}
+
+function getSongsLiked() {
+    const user = JSON.parse(localStorage.getItem('user'));
+    return user && user.songsLiked ? user.songsLiked : [];
+}
+
+function getUserId() {
+    const user = JSON.parse(localStorage.getItem('user'));
+    return user ? user.id : "";
+}
 
 function isUserLoggedIn() {
     const user = JSON.parse(localStorage.getItem('user'));
@@ -31,7 +101,7 @@ function login(username, password) {
         .then(handleResponse)
         .then(user => {
             // login successful if there's a jwt token in the response
-            if (user.token) {
+            if (user.jwtToken) {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('user', JSON.stringify(user));
             }
