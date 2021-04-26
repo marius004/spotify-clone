@@ -16,7 +16,41 @@ const userService = {
     updateSongsLikedOnBackend,
     addArtistLiked,
     removeArtistLiked,
+    updateArtistsLikedOnBackend,
 };
+
+async function updateArtistsLikedOnBackend(id) {
+    const data = [id];
+    const artistsLiked = getArtistsLiked();
+
+    console.log(artistsLiked);
+    console.log(id);
+
+    if (artistsLiked.includes(id)) {
+        const res = await axios.put(`${config.apiUrl}/user`, {
+            artistsLiked: data,
+        }, {
+            headers: authHeader(),
+        });
+
+        if (res.status == 401) {
+            logout();
+            window.location.reload(true);
+        }
+    } else {
+        const res = await axios.put(`${config.apiUrl}/user`, {
+            artistsUnliked: data,
+        }, {
+            headers: authHeader(),
+        });
+
+        if (res.status == 401) {
+            logout();
+            window.location.reload(true);
+        }
+    }
+
+}
 
 async function updateSongsLikedOnBackend(id) {
 

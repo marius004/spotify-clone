@@ -14,6 +14,7 @@
         <ArtistCard 
             :image="artistImage"
             :rating="artist.rating"
+            :artistId="artist.id"
             :quote="artist.quote"
             :name="artist.name"
             :artistLink="`/artist/${artist.id}`"

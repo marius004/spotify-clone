@@ -3,7 +3,6 @@
     <div class="row">
 
     <div class="col-lg-12">
-
             <div style="border: none;" class="card flex-md-row mb-4 box-shadow h-md-250">
                 <div class="col-lg-6">
                      <img style="border: none;" class="card-img-right flex-auto d-md-block" :src="image" >
@@ -29,6 +28,10 @@
                         {{quote}}
                         <i class="fa fa-quote-right"></i>
                     </h4>
+                    <h5 class="likes"> 
+                        Liked by {{likes}}
+                        <i @click="likeClickHandler" class="like fa fa-thumbs-up"></i>
+                    </h5>
                 </div>
             </div>
         </div>
@@ -37,10 +40,23 @@
 </template>
 
 <script>
+import artistService from '../_services/artist.service';
+import userService from '../_services/user.service';
+
 export default {
     name: "ArtistCard", 
-    
+
+    data() {
+        return {
+            likes: 0,
+        }
+    },
+
     props: {
+        artistId: {
+            type: String, 
+            reuired: true,
+        },
         image: {
             type: String, 
             required: true,
@@ -62,10 +78,44 @@ export default {
             required: false,
         }
     },
+
+    async created() {
+        try {
+            const res = await artistService.getLikes(this.artistId);
+            this.likes = res.data;
+        }catch(err) {
+            console.error(err);
+        }
+    }, 
+
+    methods: {
+        async likeClickHandler() {
+            const likedArtists = userService.getArtistsLiked();
+
+            if(likedArtists.includes(this.artistId)) {
+                userService.removeArtistLiked(this.artistId);
+                await userService.updateArtistsLikedOnBackend(this.artistId);
+                this.likes--;
+            }else { 
+                userService.addArtistLiked(this.artistId); 
+                await userService.updateArtistsLikedOnBackend(this.$route.params.id);
+                this.likes++;
+            }
+        }, 
+    }
 }
 </script>
 
 <style scoped>
+.like {
+    color: #42a5f5;
+    margin-left: 8px;
+    transition: color .6s;
+    font-size: 30px;
+}
+.like:hover {
+    color: #1976d2;
+}
 * { font-weight: bold; }
 img {
     margin-top: 20px;
@@ -103,5 +153,8 @@ img {
 }
 .stars {
     margin-bottom: 20px;
+}
+.likes {
+    padding-top: 16px;
 }
 </style>

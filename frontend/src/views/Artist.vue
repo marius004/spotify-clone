@@ -9,7 +9,8 @@
     <div v-else>
 
         <ArtistCard 
-            :image="image" 
+            :image="image"
+            :artistId="artistId" 
             :name="artistData && artistData.name ? artistData.name : ''"
             :rating="artistData && artistData.rating ? artistData.rating : -1"
             :quote="artistData.quote"

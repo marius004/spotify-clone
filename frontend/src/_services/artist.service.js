@@ -4,7 +4,12 @@ import config from '../config.js';
 const artistService = {
     getById,
     getArtistName,
+    getLikes,
 };
+
+function getLikes(id) {
+    return axios.get(`${config.apiUrl}/artist/likes/${id}`);
+}
 
 function getById(id) {
     return axios.get(`${config.apiUrl}/artists?singerId=${id}`);
