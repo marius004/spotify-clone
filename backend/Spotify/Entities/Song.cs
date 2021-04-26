@@ -13,9 +13,6 @@ namespace Spotify.Entities
         
         public string Name { get; set; }
         
-        public IEnumerable<string> LikedBy { get; set; }
-        public IEnumerable<string> DisLikedBy { get; set; }
-        
         public string ArtistId { get; set; }
         
         // base64 encoded audio
@@ -28,6 +25,7 @@ namespace Spotify.Entities
             Name = req.Name;
             ArtistId = req.ArtistId;
             Audio = req.Audio;
+            CategoriesId = req.CategoriesId;
         }
     }
 }

@@ -2,13 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Spotify.Attributes;
 using Spotify.Entities;
 using Spotify.Interfaces;
 using Spotify.Models.User;
 
 namespace Spotify.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
     {
@@ -18,14 +18,14 @@ namespace Spotify.Controllers
         {
             _userService = userService;
         }
-
-        [HttpGet]
+        
+        [HttpGet("/api/[controller]")]
         public async Task<IEnumerable<User>> Get()
         {
             return await _userService.GetAll();
         }
-
-        [HttpPost]
+        
+        [HttpPost("/api/[controller]")]
         public async Task<IActionResult> Create(CreateUserRequest req)
         {
             try
@@ -39,7 +39,7 @@ namespace Spotify.Controllers
             }
         }
 
-        [HttpPost("authenticate")]
+        [HttpPost("/api/[controller]/authenticate")]
         public async Task<IActionResult> Authenticate(AuthenticateRequest req)
         {
             var res = await _userService.Authenticate(req);
@@ -48,6 +48,15 @@ namespace Spotify.Controllers
                 return BadRequest(new {message = "Username or password incorrect"});
 
             return Ok(res);
+        }
+
+        [Authorize]
+        [HttpPut("/api/user/")]
+        public async Task<UpdateUserResponse> Update(UpdateUserRequest req)
+        {
+            var user = (User) HttpContext.Items["User"];
+            var res = await _userService.Update(user.Id, req);
+            return res;
         }
     }
 }

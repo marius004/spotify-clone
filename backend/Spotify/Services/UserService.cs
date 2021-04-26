@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
+using Spotify.Attributes;
 using Spotify.Entities;
 using Spotify.Interfaces;
 using Spotify.Models;
@@ -82,6 +83,129 @@ namespace Spotify.Services
 
             return new AuthenticateResponse(user, token);
         }
-        
+
+        [Authorize]
+        public async Task<UpdateUserResponse> Update(string id, UpdateUserRequest req)
+        {
+            var res = new UpdateUserResponse();
+            var filter = Builders<User>.Filter.Eq("Id", id);
+            
+            var tasks = new List<Task>();
+
+            if (req.Email != null)
+            {
+                var query = await _users.FindAsync(usr => usr.Email == req.Email);
+                
+                if (query.ToList().FirstOrDefault() != null)
+                {
+                    res.Errors.Add("Email already in use");
+                }
+                else
+                {
+                    var update = Builders<User>.Update.Set("Email", req.Email);
+                    tasks.Add(_users.UpdateOneAsync(filter, update));
+                }
+            }
+
+            if (req.Password != null)
+            {
+                if (req.Password.Length < 8)
+                {
+                    res.Errors.Add("Password too weak");
+                }
+                else
+                {
+                    var hashedPassword = PasswordHash.Hash(req.Password);
+                    var update = Builders<User>.Update.Set("Password", hashedPassword);
+                    tasks.Add(_users.UpdateOneAsync(filter, update));
+                }
+            }
+
+            if (req.Username != null)
+            {
+                var query = await _users.FindAsync(usr => usr.Username == req.Username);
+                if (query.ToList().FirstOrDefault() != null)
+                {
+                    res.Errors.Add("Username already taken");
+                }
+                else
+                {
+                    var update = Builders<User>.Update.Set("Username", req.Username);
+                    tasks.Add(_users.UpdateOneAsync(filter, update));
+                }
+            }
+
+            if (req.ArtistsLiked != null)
+            {
+                var user = (await _users.FindAsync(usr => usr.Id == id)).FirstOrDefault();
+
+                if (user.ArtistsLiked == null)
+                    user.ArtistsLiked = new List<string>();
+                
+                foreach (var artist in req.ArtistsLiked)
+                {
+                    if (!user.ArtistsLiked.Contains(artist))
+                        user.ArtistsLiked.Add(artist);
+                }
+
+                var update = Builders<User>.Update.Set("ArtistsLiked", user.ArtistsLiked);
+                tasks.Add(_users.UpdateOneAsync(filter, update));
+            }
+
+            if (req.ArtistsUnliked != null)
+            {
+                var user = (await _users.FindAsync(usr => usr.Id == id)).FirstOrDefault();
+
+                if (user.ArtistsLiked != null)
+                {
+                    foreach (var unlikedArtist in req.ArtistsUnliked)
+                    {
+                        if (user.ArtistsLiked.Contains(unlikedArtist))
+                            user.ArtistsLiked.Remove(unlikedArtist);
+                    }
+                }
+                
+                var update = Builders<User>.Update.Set("ArtistsLiked", user.ArtistsLiked);
+                tasks.Add(_users.UpdateOneAsync(filter, update));
+            }
+           
+            if (req.SongsLiked != null)
+            {
+                var user = (await _users.FindAsync(usr => usr.Id == id)).FirstOrDefault();
+
+                if (user.SongsLiked == null)
+                    user.SongsLiked = new List<string>();
+                
+                foreach (var song in req.SongsLiked)
+                {
+                    if (!user.SongsLiked.Contains(song))
+                        user.SongsLiked.Add(song);
+                }
+
+                var update = Builders<User>.Update.Set("SongsLiked", user.SongsLiked);
+                tasks.Add(_users.UpdateOneAsync(filter, update));
+            }
+
+            if (req.SongsUnliked != null)
+            {
+                var user = (await _users.FindAsync(usr => usr.Id == id)).FirstOrDefault();
+
+                if (user.SongsLiked != null)
+                {
+                    foreach (var song in req.SongsUnliked)
+                    {
+                        if (user.SongsLiked.Contains(song))
+                            user.SongsLiked.Remove(song);
+                    }         
+                }
+               
+                var update = Builders<User>.Update.Set("SongsLiked", user.SongsLiked);
+                tasks.Add(_users.UpdateOneAsync(filter, update));
+            }
+
+            Task.WaitAll(tasks.ToArray());
+            
+            return res;
+        }
     }
 }

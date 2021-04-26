@@ -12,7 +12,6 @@ using Spotify.Models.Artist;
 namespace Spotify.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
     public class ArtistsController : ControllerBase
     {
         private readonly DatabaseSettings _databaseSettings;
@@ -23,7 +22,20 @@ namespace Spotify.Controllers
             _databaseSettings = databaseSettings;
             _artistService = artistService;
         }
+        
+        [Route("api/[controller]/name/{id}")]
+        [HttpGet]
+        public async Task<IActionResult> GetArtistName(string id)
+        {
+            var res = await _artistService.GetById(id);
 
+            if (res == null)
+                return NotFound();
+
+            return Ok(new {name = res.Name});
+        }
+
+        [Route("api/[controller]")]
         [HttpGet]
         public async Task<IActionResult> Get(string categoryId, string singerId)
         {
@@ -49,12 +61,12 @@ namespace Spotify.Controllers
             return Ok(response);
         }
 
+        [Route("api/[controller]")]
         [HttpPost]
         public async Task<StatusCodeResult> Create(CreateArtistRequest req)
         {
             await _artistService.Create(req);
             return new StatusCodeResult(201);
         }
-
     }
 }

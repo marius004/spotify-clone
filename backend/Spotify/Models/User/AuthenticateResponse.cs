@@ -2,6 +2,7 @@ namespace Spotify.Models.User
 {
     public class AuthenticateResponse
     {
+        public string Id { get; set; }
         public string Username { get; set; }
         public string Email { get; set; }
         public string Token { get; set; }
@@ -11,6 +12,7 @@ namespace Spotify.Models.User
             Username = user.Username;
             Email = user.Email;
             Token = token;
+            Id = user.Id;
         }
     }
 }

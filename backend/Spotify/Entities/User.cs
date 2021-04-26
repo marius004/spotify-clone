@@ -20,15 +20,11 @@ namespace Spotify.Entities
 
         public bool IsAdmin { get; set; }
 
-        public IEnumerable<string> SongsLiked { get; set; }
+        public List<string> SongsLiked { get; set; }
         
-        public IEnumerable<string> BandsLiked { get; set; }
+        public List<string> ArtistsLiked { get; set; }
 
-        public IEnumerable<string> ArtistsLiked { get; set; }
-
-        public IEnumerable<string> PlaylistsLiked { get; set; }
-
-        public IEnumerable<string> CategoriesLiked { get; set; }
+        public List<string> CategoriesLiked { get; set; }
         
         public User(CreateUserRequest req)
         {

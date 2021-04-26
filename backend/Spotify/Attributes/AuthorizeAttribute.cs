@@ -12,6 +12,7 @@ namespace Spotify.Attributes
         public void OnAuthorization(AuthorizationFilterContext context)
         {
             var user = (User) context.HttpContext.Items["User"];
+            Console.WriteLine(user);
 
             if (user == null)
                 context.Result = new JsonResult(new {message = "Unauthorized"})

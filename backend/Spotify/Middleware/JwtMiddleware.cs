@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using MongoDB.Bson;
 using Spotify.Interfaces;
 using Spotify.Models;
 
@@ -29,23 +30,22 @@ namespace Spotify.Middleware
             var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
 
             if (token != null)
-                AttachUserToContext(context, token);
+                await AttachUserToContext(context, token);
 
             await _next(context);
         }
 
-        private async void AttachUserToContext(HttpContext context, string token)
+        private async Task AttachUserToContext(HttpContext context, string token)
         {
             try
             {
                 var tokenHandler = new JwtSecurityTokenHandler();
                 var key = Encoding.ASCII.GetBytes(_jwtSettings.Secret);
-
-                tokenHandler.ValidateToken(token, new TokenValidationParameters()
+                tokenHandler.ValidateToken(token, new TokenValidationParameters
                 {
-                    ValidateIssuer = true,
+                    ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateIssuerSigningKey = false,
+                    ValidateIssuer = false,
                     ValidateAudience = false,
                     // set clockskew to zero so tokens expire exactly at token expiration time (instead of 5 minutes later)
                     ClockSkew = TimeSpan.Zero
@@ -54,11 +54,13 @@ namespace Spotify.Middleware
                 var jwtToken = (JwtSecurityToken) validatedToken;
                 var userId = jwtToken.Claims.First(x => x.Type == "id").Value;
 
-                context.Items["User"] = await _userService.GetById(userId);
+                var usr = await _userService.GetById(userId);
+                context.Items["User"] = usr;
+                Console.WriteLine(usr.ToJson());
             }
-            catch
+            catch(Exception e)
             {
-                
+                Console.WriteLine(e);
             }
             
         }

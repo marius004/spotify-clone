@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Spotify.Interfaces;
+using Spotify.Middleware;
 using Spotify.Models;
 using Spotify.Services;
 
@@ -41,10 +42,10 @@ namespace Spotify
             services.AddSingleton<JwtSettings>(sp => 
                 sp.GetRequiredService<IOptions<JwtSettings>>().Value);
             
-            services.AddSingleton<IUserService, UserService>();
-            services.AddSingleton<ISongCategoryService, SongCategoryService>();
-            services.AddSingleton<IArtistService, ArtistService>();
-            services.AddSingleton<ISongService, SongService>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<ISongCategoryService, SongCategoryService>();
+            services.AddTransient<IArtistService, ArtistService>();
+            services.AddTransient<ISongService, SongService>();
 
             services.AddControllers();
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "Spotify", Version = "v1"}); });
@@ -60,6 +61,7 @@ namespace Spotify
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Spotify v1"));
             }
 
+            app.UseMiddleware<JwtMiddleware>();
             app.UseHttpsRedirection();
 
             app.UseCors(x => x
