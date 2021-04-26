@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -16,14 +17,15 @@ namespace Spotify.Controllers
     {
         private readonly DatabaseSettings _databaseSettings;
         private readonly IArtistService _artistService;
-
-        public ArtistsController(DatabaseSettings databaseSettings, IArtistService artistService)
+        private readonly IUserService _userService;
+        public ArtistsController(DatabaseSettings databaseSettings, IArtistService artistService, IUserService userService)
         {
             _databaseSettings = databaseSettings;
             _artistService = artistService;
+            _userService = userService;
         }
         
-        [Route("api/[controller]/name/{id}")]
+        [Route("/api/[controller]/name/{id}")]
         [HttpGet]
         public async Task<IActionResult> GetArtistName(string id)
         {
@@ -35,7 +37,7 @@ namespace Spotify.Controllers
             return Ok(new {name = res.Name});
         }
 
-        [Route("api/[controller]")]
+        [Route("/api/[controller]")]
         [HttpGet]
         public async Task<IActionResult> Get(string categoryId, string singerId)
         {
@@ -61,12 +63,19 @@ namespace Spotify.Controllers
             return Ok(response);
         }
 
-        [Route("api/[controller]")]
+        [Route("/api/[controller]")]
         [HttpPost]
         public async Task<StatusCodeResult> Create(CreateArtistRequest req)
         {
             await _artistService.Create(req);
             return new StatusCodeResult(201);
+        }
+
+        [HttpGet("/api/artist/likes/{id}")]
+        public async Task<int> GetLikes(string id)
+        {
+            var users = (await _userService.GetAll()).ToList();
+            return users.FindAll(usr => usr.ArtistsLiked != null && usr.ArtistsLiked.Contains(id)).Count;
         }
     }
 }

@@ -56,7 +56,6 @@ namespace Spotify.Middleware
 
                 var usr = await _userService.GetById(userId);
                 context.Items["User"] = usr;
-                Console.WriteLine(usr.ToJson());
             }
             catch(Exception e)
             {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using Spotify.Attributes;
 using Spotify.Entities;
@@ -135,8 +136,11 @@ namespace Spotify.Services
                 }
             }
 
+            Console.WriteLine("in here");
+            Console.WriteLine(req.ToJson());
             if (req.ArtistsLiked != null)
             {
+                Console.WriteLine("In here");
                 var user = (await _users.FindAsync(usr => usr.Id == id)).FirstOrDefault();
 
                 if (user.ArtistsLiked == null)
