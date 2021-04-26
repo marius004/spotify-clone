@@ -51,7 +51,7 @@ namespace Spotify.Controllers
         }
 
         [Authorize]
-        [HttpPut("/api/user/")]
+        [HttpPut("/api/user")]
         public async Task<UpdateUserResponse> Update(UpdateUserRequest req)
         {
             var user = (User) HttpContext.Items["User"];

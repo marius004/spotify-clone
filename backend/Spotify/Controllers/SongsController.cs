@@ -56,12 +56,12 @@ namespace Spotify.Controllers
         public async Task<int> GetLikes(string id)
         {
             var users = (await _userService.GetAll()).ToList();
-            return users.FindAll(usr => usr.SongsLiked.Contains(id)).Count;
+            return users.FindAll(usr => usr.SongsLiked != null && usr.SongsLiked.Contains(id)).Count;
         }
 
         [Authorize]
         [HttpPut("/api/song/{id}")]
-        public void Update(string id,UpdateSongRequest req)
+        public void Update(string id, UpdateSongRequest req)
         {
             _songService.Update(id, req);
         }
