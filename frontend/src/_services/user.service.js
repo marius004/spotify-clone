@@ -18,7 +18,22 @@ const userService = {
     removeArtistLiked,
     updateArtistsLikedOnBackend,
     isCurrentUserAdmin,
+    getAllUsers,
+    deleteUser,
 };
+
+
+function deleteUser(id) {
+    return axios.delete(`${config.apiUrl}/user/${id}`, {
+        headers: authHeader(),
+    })
+}
+
+function getAllUsers() {
+    return axios.get(`${config.apiUrl}/users`, {
+        headers: authHeader(),
+    });
+}
 
 async function isCurrentUserAdmin() {
     try {
@@ -27,7 +42,6 @@ async function isCurrentUserAdmin() {
             headers: authHeader(),
         });
 
-        console.log(res);
         return res.data;
 
     } catch (err) {
