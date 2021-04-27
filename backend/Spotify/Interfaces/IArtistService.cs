@@ -16,5 +16,7 @@ namespace Spotify.Interfaces
         Task<Artist> GetById(string id);
 
         Task<IEnumerable<Artist>> GetByCategory(string category);
+
+        Task<IEnumerable<PlainArtistResponse>> GetPlainArtists();
     }
 }

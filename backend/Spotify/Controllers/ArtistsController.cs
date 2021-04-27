@@ -37,6 +37,13 @@ namespace Spotify.Controllers
             return Ok(new {name = res.Name});
         }
 
+        [HttpGet("/api/[controller]/plain")]
+        public async Task<IActionResult> GetPlainArtists()
+        {
+            var res = await _artistService.GetPlainArtists();
+            return Ok(res);
+        }
+
         [Route("/api/[controller]")]
         [HttpGet]
         public async Task<IActionResult> Get(string categoryId, string singerId)

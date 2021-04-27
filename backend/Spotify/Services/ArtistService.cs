@@ -52,5 +52,17 @@ namespace Spotify.Services
             var query = await _artists.FindAsync(artist => artist.CategoriesId.Contains(categoryId));
             return await query.ToListAsync();
         }
+
+        public async Task<IEnumerable<PlainArtistResponse>> GetPlainArtists()
+        {
+            var query = (await _artists.FindAsync(art => true)).ToList();
+
+            List<PlainArtistResponse> res = new List<PlainArtistResponse>();
+
+            foreach (var artist in query)
+                res.Add(new PlainArtistResponse(artist));
+
+            return res;
+        }
     }
 }
