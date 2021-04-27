@@ -28,6 +28,7 @@ namespace Spotify.Entities
             CategoriesId = req.CategoriesId;
             Image = req.Image;
             Rating = -1;
+            Quote = req.Quote;
         }
     }
 }
