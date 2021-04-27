@@ -5,7 +5,12 @@ const artistService = {
     getById,
     getArtistName,
     getLikes,
+    getPlainArtists,
 };
+
+function getPlainArtists() {
+    return axios.get(`${config.apiUrl}/artists/plain`);
+}
 
 function getLikes(id) {
     return axios.get(`${config.apiUrl}/artist/likes/${id}`);

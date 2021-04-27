@@ -76,7 +76,8 @@ export default {
             else 
                 this.index = Math.max(this.index - 1, 0);
         },
-        handleSongsBtnClick(index) { 
+        handleSongsBtnClick(index) {
+            console.log(index);
             this.index = index;
         },
     },

@@ -53,7 +53,7 @@ export default {
               {
                   title: 'Eminem',
                   image: 'eminem.jpg', 
-                  artistId: '607eb9745c0f7f6194dd7922'
+                  artistId: '6081c7c0eb1113c1a5483a96'
               },
               {
                   title: 'Alter Bridge',

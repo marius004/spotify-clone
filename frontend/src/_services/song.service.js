@@ -1,11 +1,24 @@
 import axios from "axios";
 import config from "../config";
+import { authHeader } from "../_helpers/auth-header";
 
 const songService = {
     getBySinger,
     getById,
     getSongLikes,
+    createNewSong,
 };
+
+function createNewSong(name, artistId, categoriesId, base64Audio) {
+    return axios.post(`${config.apiUrl}/songs`, {
+        name,
+        artistId,
+        audio: base64Audio,
+        categoriesId
+    }, {
+        headers: authHeader(),
+    });
+}
 
 function getSongLikes(id) {
     return axios.get(`${config.apiUrl}/song/likes/${id}`);
