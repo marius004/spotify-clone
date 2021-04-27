@@ -1,12 +1,25 @@
 import axios from 'axios';
 import config from '../config.js';
+import { authHeader } from '../_helpers/auth-header.js';
 
 const artistService = {
     getById,
     getArtistName,
     getLikes,
     getPlainArtists,
+    createNewArtist,
 };
+
+function createNewArtist(name, categoriesId, quote, image) {
+    return axios.post(`${config.apiUrl}/artists`, {
+        name,
+        categoriesId,
+        quote,
+        image,
+    }, {
+        headers: authHeader(),
+    })
+}
 
 function getPlainArtists() {
     return axios.get(`${config.apiUrl}/artists/plain`);

@@ -1,4 +1,5 @@
 <template>
+ <h2 class="title">Update Songs</h2>
     <div class="row updateSongs">
         <div class="col col-lg-6 create-col">
             <h2>Create Song</h2>
@@ -92,7 +93,7 @@ export default {
 <style scoped>
 * { font-weight: 900; }
 .updateSongs {
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 .form-container {
     width: 96%;

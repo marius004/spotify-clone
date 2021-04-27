@@ -58,7 +58,7 @@ export default {
               {
                   title: 'Alter Bridge',
                   image: 'alter-bridge.jpg', 
-                  artistId: '607eb9745c0f7f6194dd7922'
+                  artistId: '60886abfd12ddec30ea90ae9'
               }
           ]
       ]
