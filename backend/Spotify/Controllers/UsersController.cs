@@ -19,6 +19,7 @@ namespace Spotify.Controllers
             _userService = userService;
         }
         
+        [Admin]
         [HttpGet("/api/[controller]")]
         public async Task<IEnumerable<User>> Get()
         {
