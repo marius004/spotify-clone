@@ -51,6 +51,12 @@ namespace Spotify.Controllers
             return Ok(res);
         }
 
+        [HttpGet("/api/user/isAdmin/{id}")]
+        public async Task<bool> IsAdmin(string id)
+        {
+            return await _userService.IsAdmin(id);
+        }
+
         [Authorize]
         [HttpPut("/api/user")]
         public async Task<UpdateUserResponse> Update(UpdateUserRequest req)

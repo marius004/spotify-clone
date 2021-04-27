@@ -216,5 +216,11 @@ namespace Spotify.Services
         {
             await _users.DeleteOneAsync(usr => usr.Id == id);
         }
+
+        public async Task<bool> IsAdmin(string id)
+        {
+            var user = (await _users.FindAsync(usr => usr.Id == id)).FirstOrDefault();
+            return user != null ? user.IsAdmin : false;
+        }
     }
 }
