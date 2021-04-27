@@ -21,7 +21,5 @@ namespace Spotify.Interfaces
         Task<UpdateUserResponse> Update(string id, UpdateUserRequest req);
 
         Task Delete(string id);
-
-        Task<bool> IsAdmin(string id);
     }
 }

@@ -36,6 +36,18 @@ const routes = [{
         name: 'Song',
         component: () =>
             import ('../views/Song.vue'),
+    },
+    {
+        path: '/admin',
+        name: 'Admin',
+        component: () =>
+            import ('../views/AdminPanel.vue'),
+    },
+    {
+        path: '/forbidden',
+        name: 'Forbidden',
+        component: () =>
+            import ('../views/Forbidden.vue'),
     }
 ];
 
@@ -44,15 +56,21 @@ const router = createRouter({
     routes
 });
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async(to, from, next) => {
 
     // redirect to login page if not logged in and trying to access a restricted page
-    const publicPages = ['/login', '/', '/signup'];
+    const publicPages = ['/login', '/', '/signup', '/forbidden'];
     const authRequired = !publicPages.includes(to.path);
     const loggedIn = userService.isUserLoggedIn();
 
     if (authRequired && !loggedIn)
         return next('/login');
+
+    if (to.path == '/admin') {
+        const isAdmin = await userService.isCurrentUserAdmin();
+        if (!isAdmin)
+            return next('/forbidden');
+    }
 
     next();
 });

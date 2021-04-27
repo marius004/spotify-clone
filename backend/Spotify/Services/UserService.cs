@@ -136,11 +136,8 @@ namespace Spotify.Services
                 }
             }
 
-            Console.WriteLine("in here");
-            Console.WriteLine(req.ToJson());
             if (req.ArtistsLiked != null)
             {
-                Console.WriteLine("In here");
                 var user = (await _users.FindAsync(usr => usr.Id == id)).FirstOrDefault();
 
                 if (user.ArtistsLiked == null)
@@ -215,12 +212,6 @@ namespace Spotify.Services
         public async Task Delete(string id)
         {
             await _users.DeleteOneAsync(usr => usr.Id == id);
-        }
-
-        public async Task<bool> IsAdmin(string id)
-        {
-            var user = (await _users.FindAsync(usr => usr.Id == id)).FirstOrDefault();
-            return user != null ? user.IsAdmin : false;
         }
     }
 }

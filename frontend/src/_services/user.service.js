@@ -17,7 +17,23 @@ const userService = {
     addArtistLiked,
     removeArtistLiked,
     updateArtistsLikedOnBackend,
+    isCurrentUserAdmin,
 };
+
+async function isCurrentUserAdmin() {
+    try {
+
+        const res = await axios.post(`${config.apiUrl}/user/isAdmin`, {}, {
+            headers: authHeader(),
+        });
+
+        console.log(res);
+        return res.data;
+
+    } catch (err) {
+        return false;
+    }
+}
 
 async function updateArtistsLikedOnBackend(id) {
     const data = [id];

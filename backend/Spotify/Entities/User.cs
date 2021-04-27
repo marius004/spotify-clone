@@ -31,7 +31,6 @@ namespace Spotify.Entities
             Email = req.Email;
             Username = req.Username;
             Password = PasswordHash.Hash(req.Password);
-            IsAdmin = true;
         }
     }
 }
