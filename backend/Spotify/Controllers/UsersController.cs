@@ -58,5 +58,22 @@ namespace Spotify.Controllers
             var res = await _userService.Update(user.Id, req);
             return res;
         }
+
+        [Authorize]
+        [HttpDelete("/api/user")]
+        public async Task<IActionResult> Delete()
+        {
+            var user = (User) HttpContext.Items["User"];
+            await _userService.Delete(user.Id);
+            return Ok();
+        }
+
+        [Admin]
+        [HttpDelete("/api/user/{id}")]
+        public async Task<IActionResult> Delete(string id)
+        {
+            await _userService.Delete(id);
+            return Ok();
+        }
     }
 }

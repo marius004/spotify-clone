@@ -211,5 +211,10 @@ namespace Spotify.Services
             
             return res;
         }
+
+        public async Task Delete(string id)
+        {
+            await _users.DeleteOneAsync(usr => usr.Id == id);
+        }
     }
 }

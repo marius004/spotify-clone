@@ -17,6 +17,9 @@ namespace Spotify.Interfaces
         Task<CreateUserResponse> Create(CreateUserRequest req);
 
         Task<AuthenticateResponse> Authenticate(AuthenticateRequest req);
+        
         Task<UpdateUserResponse> Update(string id, UpdateUserRequest req);
+
+        Task Delete(string id);
     }
 }
