@@ -1,6 +1,6 @@
 <template>
     <div class="updateUsers">
-        <h2 class="title">Update Users</h2>
+        <h2 class="title">Delete Users</h2>
         <table class="table table-striped table-dark">
             <thead>
                 <tr>

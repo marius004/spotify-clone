@@ -7,7 +7,18 @@ const songService = {
     getById,
     getSongLikes,
     createNewSong,
+    updateSong,
 };
+
+function updateSong(songId, name, artistId, audio) {
+    return axios.put(`${config.apiUrl}/song/${songId}`, {
+        name,
+        artistId,
+        audio,
+    }, {
+        headers: authHeader(),
+    });
+}
 
 function createNewSong(name, artistId, categoriesId, base64Audio) {
     return axios.post(`${config.apiUrl}/songs`, {

@@ -1,6 +1,6 @@
 <template>
     <div class="updateArtists">
-        <h2>Update Artists</h2>
+        <h2>Update/Create Artists</h2>
         <div class="row">
             <div class="col col-lg-6 createArtist">
                 <h2>Create Artist</h2>
