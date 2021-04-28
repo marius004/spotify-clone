@@ -5,7 +5,7 @@
             <h2>Create Song</h2>
             <CreateSong />
         </div>
-        <div class="col col-lg-6">
+        <div class="col col-lg-6" style="background-color: #ffe0b2;">
             <div class="form-container">
                 <h2>Update Song</h2>
                 <UpdateSong />
@@ -19,7 +19,7 @@ import CreateSong from "./CreateSong";
 import UpdateSong from "./UpdateSong";
 
 export default {
-    name: "UpdateSongs", 
+    name: "UpdateSongForm", 
     
     components: {
         CreateSong,

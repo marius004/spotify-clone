@@ -8,7 +8,20 @@ const artistService = {
     getLikes,
     getPlainArtists,
     createNewArtist,
+    updateArtist,
 };
+
+function updateArtist(id, name, categoriesId, rating, quote, image) {
+    return axios.put(`${config.apiUrl}/artist/${id}`, {
+        name,
+        categoriesId,
+        rating,
+        quote,
+        image,
+    }, {
+        headers: authHeader(),
+    });
+}
 
 function createNewArtist(name, categoriesId, quote, image) {
     return axios.post(`${config.apiUrl}/artists`, {

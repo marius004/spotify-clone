@@ -7,8 +7,8 @@
         />
         <div class="updateContainer">
             <UpdateUsers /> 
-            <UpdateSongs />     
-            <UpdateArtists />
+            <UpdateSongForm />     
+            <UpdateArtistForm />
         </div>
     </div>
 </template>
@@ -17,8 +17,8 @@
 import Navbar from '@/components/Navbar.vue';
 import Jumbotron from '@/components/Jumbotron.vue';
 import UpdateUsers from '@/components/Admin/UpdateUsers.vue';
-import UpdateSongs from '@/components/Admin/UpdateSongs.vue';
-import UpdateArtists from '@/components/Admin/UpdateArtists.vue';
+import UpdateSongForm from '@/components/Admin/UpdateSongForm.vue';
+import UpdateArtistForm from '@/components/Admin/UpdateArtistForm.vue';
 
 export default {
     name: "AdminPanel", 
@@ -26,8 +26,8 @@ export default {
         Navbar,
         Jumbotron,
         UpdateUsers,
-        UpdateSongs,
-        UpdateArtists,
+        UpdateSongForm,
+        UpdateArtistForm,
     }
 }
 </script>

@@ -29,7 +29,7 @@
         <div class="form-group">
             <button class="update-btn btn btn-success">Submit</button>
         </div>
-    </form>
+    </form> 
 </template>
 
 <script>
@@ -95,6 +95,7 @@ export default {
 </script>
 
 <style scoped>
+* { font-weight: 900; }
 .select-artist, .select-categories {
     text-align: left;
 }
