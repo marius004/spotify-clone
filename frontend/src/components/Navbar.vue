@@ -74,7 +74,7 @@ export default {
 <style scoped>
 #nav {
     opacity: 0.85;
-    z-index: 1;
+    z-index: 1000;
     border-bottom: 1px solid black;
 }
 #nav .nav-link {
