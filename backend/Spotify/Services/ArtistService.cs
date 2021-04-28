@@ -53,6 +53,44 @@ namespace Spotify.Services
             return await query.ToListAsync();
         }
 
+        public void Update(string id, UpdateArtistRequest req)
+        {
+            var filter = Builders<Artist>.Filter.Eq("Id", id);
+            List<Task> tasks = new List<Task>();
+            
+            if (!string.IsNullOrEmpty(req.Image) && !string.IsNullOrWhiteSpace(req.Image))
+            {
+                var update = Builders<Artist>.Update.Set("Image", req.Image);
+                tasks.Add(_artists.UpdateOneAsync(filter, update));
+            }
+
+            if (!string.IsNullOrEmpty(req.Name) && !string.IsNullOrWhiteSpace(req.Name))
+            {
+                var update = Builders<Artist>.Update.Set("Name", req.Name);
+                tasks.Add(_artists.UpdateOneAsync(filter, update)); 
+            }
+
+            if (!string.IsNullOrEmpty(req.Quote) && !string.IsNullOrWhiteSpace(req.Quote))
+            {
+                var update = Builders<Artist>.Update.Set("Quote", req.Quote);
+                tasks.Add(_artists.UpdateOneAsync(filter, update)); 
+            }
+
+            if (req.Rating is > 0 and <= 5)
+            {
+                var update = Builders<Artist>.Update.Set("Rating", req.Rating);
+                tasks.Add(_artists.UpdateOneAsync(filter, update));
+            }
+
+            if (req.CategoriesId != null)
+            {
+                var update = Builders<Artist>.Update.Set("CategoriesId", req.CategoriesId);
+                tasks.Add(_artists.UpdateOneAsync(filter, update));
+            }
+
+            Task.WaitAll(tasks.ToArray());
+        }
+
         public async Task<IEnumerable<PlainArtistResponse>> GetPlainArtists()
         {
             var query = (await _artists.FindAsync(art => true)).ToList();

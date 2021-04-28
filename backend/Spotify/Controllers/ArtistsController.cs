@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading;
+using Spotify.Attributes;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Spotify.Entities;
@@ -83,6 +84,13 @@ namespace Spotify.Controllers
         {
             var users = (await _userService.GetAll()).ToList();
             return users.FindAll(usr => usr.ArtistsLiked != null && usr.ArtistsLiked.Contains(id)).Count;
+        }
+
+        [Admin]
+        [HttpPut("/api/artist/{id}")]
+        public void Update(string id, UpdateArtistRequest req)
+        {
+            _artistService.Update(id, req);
         }
     }
 }
