@@ -1,5 +1,5 @@
 <template>
-    <div class="updateUsers">
+    <div class="updateUsers" style="max-height: 40vh; overflow: auto;">
         <h2 class="title">Delete Users</h2>
         <table class="table table-striped table-dark">
             <thead>

@@ -7,6 +7,7 @@
         />
         <div class="updateContainer">
             <UpdateUsers /> 
+            <DeleteSongs />
             <UpdateSongForm />     
             <UpdateArtistForm />
         </div>
@@ -19,6 +20,7 @@ import Jumbotron from '@/components/Jumbotron.vue';
 import UpdateUsers from '@/components/Admin/UpdateUsers.vue';
 import UpdateSongForm from '@/components/Admin/UpdateSongForm.vue';
 import UpdateArtistForm from '@/components/Admin/UpdateArtistForm.vue';
+import DeleteSongs from '@/components/Admin/DeleteSongs.vue';
 
 export default {
     name: "AdminPanel", 
@@ -28,6 +30,7 @@ export default {
         UpdateUsers,
         UpdateSongForm,
         UpdateArtistForm,
+        DeleteSongs,
     }
 }
 </script>

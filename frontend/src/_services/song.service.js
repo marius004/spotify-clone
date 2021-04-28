@@ -8,7 +8,19 @@ const songService = {
     getSongLikes,
     createNewSong,
     updateSong,
+    getAll,
+    deleteById,
 };
+
+function deleteById(id) {
+    return axios.delete(`${config.apiUrl}/song/${id}`, {
+        headers: authHeader(),
+    });
+}
+
+function getAll() {
+    return axios.get(`${config.apiUrl}/songs/plain`);
+}
 
 function updateSong(songId, name, artistId, audio) {
     return axios.put(`${config.apiUrl}/song/${songId}`, {
