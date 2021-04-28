@@ -17,6 +17,8 @@ namespace Spotify.Interfaces
         Task<Song> GetById(string id);
 
         void Update(string id, UpdateSongRequest req);
+
+        Task<IEnumerable<PlainSongResponse>> GetPlainSongs();
         Task DeleteById(string id);
     }
 }

@@ -13,13 +13,15 @@ namespace Spotify.Services
     public class SongService : ISongService
     {
         private readonly IMongoCollection<Song> _songs;
+        private readonly IArtistService _artistService;
         
-        public SongService(DatabaseSettings databaseSettings)
+        public SongService(DatabaseSettings databaseSettings, IArtistService artistService)
         {
             var client = new MongoClient(databaseSettings.ConnectionString);
             var database = client.GetDatabase(databaseSettings.DatabaseName);
 
             _songs = database.GetCollection<Song>(databaseSettings.SongsCollectionName);
+            _artistService = artistService;
         }
 
         public async Task Create(CreateSongRequest req)
@@ -83,7 +85,21 @@ namespace Spotify.Services
             
             Task.WaitAll(tasks.ToArray());
         }
-        
+
+        public async Task<IEnumerable<PlainSongResponse>> GetPlainSongs()
+        {
+            var songs = await GetAll();
+            var res = new List<PlainSongResponse>();
+
+            foreach (var song in songs)
+            {
+                var artist = await _artistService.GetById(song.ArtistId);
+                res.Add(new PlainSongResponse(song, artist.Name));
+            }
+
+            return res;
+        }
+
         public async Task DeleteById(string id)
         {
             await _songs.DeleteOneAsync(song => song.Id == id);

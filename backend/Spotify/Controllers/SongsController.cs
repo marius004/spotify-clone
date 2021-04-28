@@ -59,18 +59,24 @@ namespace Spotify.Controllers
             return users.FindAll(usr => usr.SongsLiked != null && usr.SongsLiked.Contains(id)).Count;
         }
 
-        [Authorize]
+        [Admin]
         [HttpPut("/api/song/{id}")]
         public void Update(string id, UpdateSongRequest req)
         {
             _songService.Update(id, req);
         }
 
-        [Authorize]
+        [Admin]
         [HttpDelete("/api/song/{id}")]
         public async Task Delete(string id)
         {
             await _songService.DeleteById(id);
+        }
+
+        [HttpGet("/api/songs/plain")]
+        public async Task<IEnumerable<PlainSongResponse>> GetPlainSongs()
+        {
+            return await _songService.GetPlainSongs();
         }
     }
 }
