@@ -48,6 +48,12 @@ const routes = [{
         name: 'Forbidden',
         component: () =>
             import ('../views/Forbidden.vue'),
+    },
+    {
+        path: '/webplayer',
+        name: 'WebPlayer',
+        component: () =>
+            import ('../views/WebPlayer.vue')
     }
 ];
 

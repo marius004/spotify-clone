@@ -12,7 +12,7 @@
             :image="image"
             :artistId="artistId" 
             :name="artistData && artistData.name ? artistData.name : ''"
-            :rating="artistData && artistData.rating ? artistData.rating : -1"
+            :rating="artistData && artistData.rating ? getRandomStars() : -1"
             :quote="artistData.quote"
         />
 
@@ -64,6 +64,11 @@ export default {
     }, 
 
     methods: {
+        getRandomStars() {
+            const start = 0;
+            const end = 5;
+            return Math.floor(Math.random() * (end - start + 1) + start);
+        },
         nextSong() {
            if(this.index === this.audioData.length - 1)
                 this.index = 0;

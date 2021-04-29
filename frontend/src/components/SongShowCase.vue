@@ -1,8 +1,13 @@
 <template>
-    <div class="looking-for-music">
+    <div v-if="!hideText" 
+        class="looking-for-music"
+    >
         <h1>Looking for music?</h1>
         <h4>Start listening to the best new releases.</h4>
-        <button class="launch-web-player-btn btn text-center">Launch Web Player</button>
+        <button @click="$router.push('/webplayer')" class="launch-web-player-btn btn text-center">Launch Web Player</button>
+    </div>
+    <div v-if="hideText"
+        style="margin-top: 100px;">
     </div>
     <SongCards :cards="cards" />
 </template>
@@ -22,6 +27,10 @@ export default {
         cards: {
             type: Array, 
             required: true,
+        }, 
+        hideText: {
+            type: Boolean, 
+            required: false,
         }
     }
 }

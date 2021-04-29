@@ -4,6 +4,7 @@
     <Jumbotron 
       title="Listen to music. Everywhere."
       buttonTitle="Listen to music"
+      @btnClick="jumbotronClickHandler"
     />
     <SongShowCase 
       :cards="cards" 
@@ -26,6 +27,13 @@ export default {
     SongShowCase,
     Footer,
   }, 
+
+  methods: {
+    jumbotronClickHandler() {
+      this.$router.push('/webplayer');
+    }
+  },
+
   data() {
     return {
       cards: [
@@ -37,18 +45,18 @@ export default {
               {
                   title: 'Snoop Dogg',
                   image: 'snoop-dogg.jpg', 
-                  artistId: '607eb9745c0f7f6194dd7922'
+                  artistId: '6089934f857cf0b778978b9a'
               },
               {
-                  title: 'Chad Kroeger',
+                  title: 'Nickleback',
                   image: 'chad-kroeger.jpg', 
-                  artistId: '607eb9745c0f7f6194dd7922'
+                  artistId: '608994b7857cf0b778978b9b'
               }
           ],
           [{
                   title: 'Creed',
                   image: 'creed.jpg', 
-                  artistId: '607eb9745c0f7f6194dd7922'
+                  artistId: '60899572857cf0b778978b9c'
               },
               {
                   title: 'Eminem',

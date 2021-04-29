@@ -8,6 +8,7 @@
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
                     <th scope="col">Artist</th>
+                    <th scope="col">Id</th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
@@ -21,6 +22,9 @@
                     </td>
                     <td>
                         {{song.artistName}}
+                    </td>
+                    <td>
+                        {{song.id}}
                     </td>
                     <td>
                         <button @click="deleteHandler(song)" type="button" class="btn btn-danger">Delete</button>

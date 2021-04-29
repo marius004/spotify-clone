@@ -2,7 +2,7 @@
 <div class="jumbotron" :style="jumbotronStyling"> 
   <div class="center">
     <h1 class="title display-4" style="margin-top: 40px;">{{title}}</h1>
-    <button class="btn btn-success btn-lg" href="#" role="button">{{buttonTitle}}</button>
+    <button @click="$emit('btn-click')" class="btn btn-success btn-lg" href="#" role="button">{{buttonTitle}}</button>
   </div>
 </div>    
 </template>

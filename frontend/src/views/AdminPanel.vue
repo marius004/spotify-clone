@@ -4,6 +4,7 @@
         <Jumbotron 
             title="Welcome to the admin page"
             buttonTitle="Go home"
+            @btnClick="jumbotronClickHandler"
         />
         <div class="updateContainer">
             <UpdateUsers /> 
@@ -31,6 +32,11 @@ export default {
         UpdateSongForm,
         UpdateArtistForm,
         DeleteSongs,
+    }, 
+    methods: {
+        jumbotronClickHandler() {
+            this.$router.push('/');
+        }
     }
 }
 </script>
