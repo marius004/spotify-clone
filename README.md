@@ -1,4 +1,4 @@
-# Spotify Clone. Brief preview
+# Spotify Clone(.NET CORE + Mongo + Vue). Brief preview
 
 ## Frontend Structure
 
