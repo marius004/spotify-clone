@@ -1,4 +1,4 @@
-# Spotify Clone(.NET CORE + Mongo + Vue). Brief preview
+## Spotify Clone
 
 * Built with .NET Core, Vuejs, Mongo
 * Implemented a complex panel for managing users, artists, and songs
